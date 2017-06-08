@@ -5,8 +5,7 @@ use Laravel\Scout\Builder;
 
 if (! Builder::hasMacro('count')) {
     /**
-     * Return the number of results without building the final Collection
-     * No database calls are made
+     * Return the total amount of results for the current query.
      *
      * @return int Number of results
      */
@@ -19,7 +18,7 @@ if (! Builder::hasMacro('count')) {
 
 if (! Builder::hasMacro('around')) {
     /**
-     * Add geolocation paramters to the search query
+     * Add geo-location parameters to the search query
      *
      * @see https://www.algolia.com/doc/guides/geo-search/geo-search-overview/
      *
