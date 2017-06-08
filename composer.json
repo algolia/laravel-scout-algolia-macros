@@ -25,5 +25,12 @@
         "psr-4": {
             "Algolia\\ScoutMacros\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Algolia\\ScoutMacros\\ServiceProvider"
+            ]
+        }
     }
 }
