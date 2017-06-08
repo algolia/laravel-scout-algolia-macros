@@ -1,10 +1,6 @@
 # Laravel Scout Algolia Macros
 
-A collection of useful macros to extend Laravel Scout capability.
-
-Laravel Scout added in version 3.0.5 the `Macroable` trait to the builder. It
-means that you can know extend the builder according to your needs, without
-having to extend a whole bunch of classes.
+A collection of useful macros to extend Laravel Scout capabilities when using the [Algolia engine](https://laravel.com/docs/5.4/scout#driver-prerequisites).
 
 This package aims to provide a set of macros to take advantage of the
 Algolia-specific feature.
