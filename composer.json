@@ -24,5 +24,5 @@
         "psr-4": {
             "Algolia\\ScoutMacros\\": "src"
         }
-    },
+    }
 }
