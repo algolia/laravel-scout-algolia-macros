@@ -2,10 +2,10 @@
 
 namespace Algolia\ScoutMacros;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 
-class ScoutBuilderMacrosServiceProvider extends ServiceProvider
+class ServiceProvider extends LaravelServiceProvider
 {
     public function boot()
     {

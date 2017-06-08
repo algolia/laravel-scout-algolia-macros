@@ -14,11 +14,11 @@ Pull the package using composer
 composer install algolia/laravel-scout-algolia-macros
 ```
 
-Next, you should add the `ScoutBuilderMacrosServiceProvider` to the `providers`
+Next, you should add the `Algolia\ScoutMacros\ServiceProvider` to the `providers`
 array of your `config/app.php` configuration file:
 
 ```php
-Algolia\ScoutMacros\ScoutBuilderMacrosServiceProvider::class
+Algolia\ScoutMacros\ServiceProvider::class
 ```
 
 
