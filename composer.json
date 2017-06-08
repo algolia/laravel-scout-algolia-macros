@@ -1,11 +1,12 @@
 {
     "name": "algolia/laravel-scout-algolia-macros",
-    "description": "A collection of useful macros to extend Laravel Scout capability",
+    "description": "A collection macros to extend Laravel Scout with more Algolia capabilities",
     "keywords": [
         "algolia",
         "laravel-scout",
         "search-engine",
-        "laravel-macros"
+        "laravel-macros",
+        "search"
     ],
     "type": "library",
     "homepage": "https://github.com/algolia/laravel-scout-algolia-macros",
