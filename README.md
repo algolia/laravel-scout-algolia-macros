@@ -34,21 +34,21 @@ The point is to avoid pull data from the database and building the collection.
 $nbHits = Model::search('query')->count();
 ```
 
-## `around`
+## `aroundLatLng`
 
-The around method will add [geolocation parameter](1) to the search request. You
-can define a point with its coordinate and the radius around it (in meters).
+The`aroundLatLng` method will add [geolocation parameter](1) to the search request. You
+can define a point with its coordinate.
 
 ```php
-//Models around Paris
-Model::search('query')->around(48.8588536, 2.3125377, 10000)->get();
+// Models around Paris latitude and longitude
+Model::search('query')->aroundLatLng(48.8588536, 2.3125377)->get();
 ```
 
 Where clauses can also be added
 
 ```php
 Model::search('query')
-    ->around(48.8588536, 2.3125377, 10000)
+    ->aroundLatLng(48.8588536, 2.3125377)
     ->where('something_id', 1)
     ->get();
 ```
