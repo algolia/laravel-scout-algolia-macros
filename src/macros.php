@@ -16,7 +16,7 @@ if (! Builder::hasMacro('count')) {
     });
 }
 
-if (! Builder::hasMacro('around')) {
+if (! Builder::hasMacro('aroundLatLng')) {
     /**
      * Search for entries around a given location.
      *
