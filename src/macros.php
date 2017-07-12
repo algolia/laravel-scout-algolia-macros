@@ -48,3 +48,36 @@ if (! Builder::hasMacro('aroundLatLng')) {
         return $this;
     });
 }
+
+if (! Builder::hasMacro('with')) {
+    /**
+     * Override the algolia search options to give you full control over the request,
+     * similar to official algolia-laravel package.
+     *
+     * Adds the final missing piece to scout to make the library useful.
+     *
+     * @param array $opts Latitude of the center
+     *
+     * @return Laravel\Scout\Builder
+     */
+    Builder::macro('with', function ($opts) {
+        $callback = $this->callback;
+
+        $this->callback = function ($algolia, $query, $options) use ($opts, $callback) {
+            $options = array_merge($options, $opts);
+
+            if ($callback) {
+                return call_user_func(
+                    $callback,
+                    $algolia,
+                    $query,
+                    $options
+                );
+            }
+
+            return $algolia->search($query, $options);
+        };
+
+        return $this;
+    });
+}
