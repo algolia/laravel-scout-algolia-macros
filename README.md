@@ -56,7 +56,7 @@ Model::search('query')
 
 ## `with`
 
-The`with` method gives you complete access to the Algolia options parameter. This allows you
+The `with` method gives you complete access to the Algolia options parameter. This allows you
 to customise the search parameters exactly the same as you would using the algolia php library directly.
 
 ```php
