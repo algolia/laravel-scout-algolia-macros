@@ -11,14 +11,14 @@ Algolia-specific feature.
 Pull the package using composer
 
 ```
-composer install holidaywatchdog/laravel-scout-algolia-macros
+composer install algolia/laravel-scout-algolia-macros
 ```
 
-Next, you should add the `HolidayWatchdog\ScoutMacros\ServiceProvider` to the `providers`
+Next, you should add the `Algolia\ScoutMacros\ServiceProvider` to the `providers`
 array of your `config/app.php` configuration file:
 
 ```php
-HolidayWatchdog\ScoutMacros\ServiceProvider::class
+Algolia\ScoutMacros\ServiceProvider::class
 ```
 
 
