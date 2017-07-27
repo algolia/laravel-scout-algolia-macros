@@ -54,6 +54,94 @@ Model::search('query')
 ```
 
 
+## `with`
+
+The `with` method gives you complete access to the Algolia options parameter. This allows you
+to customise the search parameters exactly the same as you would using the algolia php library directly.
+
+```php
+
+$filters = [
+    'averge_ratings >= 3',
+    'total_reviews >= 1'
+];
+
+$filterString = implode(' AND ', $filters);
+
+$params = [
+            'aroundLatLng' => $lat.','.$lon,
+            'hitsPerPage' => 30,
+            'page' => 0,
+            'aroundRadius' => 30000, //30km
+            'aroundPrecision' => 200), //200 Meters
+            'getRankingInfo' => true, //return ranking information in results
+            'filters' => $filterString // add filters
+        ];
+
+$result = Model::search('')->with($params)->get();
+
+```
+
+
+## `hydrate`
+
+The `hydrate` method is similar to the standard get() method, except it hydrates the models from your Algolia index
+instead of of using the objects keys to pull the related models from your database, meaning much quicker response times.
+
+This also gives you the ability to overide the fill() method on any model to use the additional data that you store 
+in your indexes.
+
+Note: By using this method you must be sure that you are correctly keeping your algolia index in sync with your database
+to avoid populating stale data.
+
+Example model with additional data from Algolia Index being populated:
+
+```php
+
+class ExampleModel extends Model
+{
+    use Searchable;
+
+    protected $appends = [
+        'rankingInfo' //Add rankingInfo when converted to array
+    ];
+
+    protected $rankingInfo = [];
+    protected $highlightResult = [];
+
+    /**
+     * Adds the ranking & highlight results from the search request to get search score/geo distance etc
+     *
+     * @param array $attributes
+     * @return mixed
+     */
+    public function fill(array $attributes)
+    {
+
+        if (isset($attributes['_rankingInfo']))
+        {
+            $this->setRankingInfo($attributes['_rankingInfo']);
+        }
+        
+        //Add any additional data stored in algolia as required
+
+        return parent::fill($attributes);
+    }
+
+    public function getRankingInfoAttribute(): array
+    {
+        return $this->rankingInfo;
+    }
+
+    public function setRankingInfo(array $rankingInfo)
+    {
+        $this->rankingInfo = $rankingInfo;
+    }
+
+$result = ExampleModel::search('')->with($params)->get();
+
+```
+
 ## Contributing
 
 Feel free to open an issue to request a macro.
