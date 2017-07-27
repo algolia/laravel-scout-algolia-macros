@@ -48,9 +48,25 @@ to avoid populating stale data.
 
 #### Restrict attributes
 
-By default, this method will add all attributes from Algolia's record to your model. 
+By default, this method will add all attributes from Algolia's record to your model. If you want to remove sensitive or irrelevant data from your model, you have two options.
 
-If you want to remove sensitive or irrelevant data from your model, you can set a list of retrievable attributes in your Algolia dashboard. In this case, Algolia will only return these attributes while still searching every `searchableAttributes`.
+You can set a list of retrievable attributes in your Algolia dashboard. In this case, Algolia will only return these attributes while still searching every `searchableAttributes`.
+
+You may as well use the laravel `$guarded` attributes of your model class. For instance, if you don't want to see the `_h` attribute in your collection, you will have the following.
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+
+class People extends Model
+{
+    use Searchable;
+
+    protected $guarded = ['_highlightResult'];
+}
+```
 
 ### `with`
 
