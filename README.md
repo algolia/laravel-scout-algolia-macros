@@ -34,30 +34,38 @@ The point is to avoid pull data from the database and building the collection.
 $nbHits = Model::search('query')->count();
 ```
 
-## `aroundLatLng`
+### `hydrate`
 
-The`aroundLatLng` method will add [geolocation parameter](1) to the search request. You
-can define a point with its coordinate.
+The `hydrate` method is similar to the standard get() method, except it hydrates the models from your Algolia index.
 
-```php
-// Models around Paris latitude and longitude
-Model::search('query')->aroundLatLng(48.8588536, 2.3125377)->get();
-```
+By default, Scout will use the IDs of the results from Algolia and pull the data from the local database to create the collection.
 
-Where clauses can also be added
-
-```php
-Model::search('query')
-    ->aroundLatLng(48.8588536, 2.3125377)
-    ->where('something_id', 1)
-    ->get();
-```
+Hence, `hydrate` will be much faster than `get`.
 
 
-## `with`
+**Note**: By using this method you must be sure that you are correctly keeping your algolia index in sync with your database
+to avoid populating stale data.
+
+#### Restrict attributes
+
+By default, this method will add all attributes from Algolia's record to your model. 
+
+If you want to remove sensitive or irrelevant data from your model, you can set a list of retrievable attributes in your Algolia dashboard. In this case, Algolia will only return these attributes while still searching every `searchableAttributes`.
+
+### `with`
 
 The `with` method gives you complete access to the Algolia options parameter. This allows you
 to customise the search parameters exactly the same as you would using the algolia php library directly.
+
+#### Simple example
+
+```php
+$result = Model::search('')
+					->with(['hitsPerPage' => 30])
+					->get();
+```
+
+#### Advanced example
 
 ```php
 
@@ -83,64 +91,27 @@ $result = Model::search('')->with($params)->get();
 ```
 
 
-## `hydrate`
+### `aroundLatLng`
 
-The `hydrate` method is similar to the standard get() method, except it hydrates the models from your Algolia index
-instead of of using the objects keys to pull the related models from your database, meaning much quicker response times.
+The`aroundLatLng` method will add [geolocation parameter](1) to the search request. You
+can define a point with its coordinate.
 
-This also gives you the ability to overide the fill() method on any model to use the additional data that you store 
-in your indexes.
-
-Note: By using this method you must be sure that you are correctly keeping your algolia index in sync with your database
-to avoid populating stale data.
-
-Example model with additional data from Algolia Index being populated:
+Note that this method is pure syntactic sugar, you can use `with` to specify more location details (like radius for instance)
 
 ```php
-
-class ExampleModel extends Model
-{
-    use Searchable;
-
-    protected $appends = [
-        'rankingInfo' //Add rankingInfo when converted to array
-    ];
-
-    protected $rankingInfo = [];
-    protected $highlightResult = [];
-
-    /**
-     * Adds the ranking & highlight results from the search request to get search score/geo distance etc
-     *
-     * @param array $attributes
-     * @return mixed
-     */
-    public function fill(array $attributes)
-    {
-
-        if (isset($attributes['_rankingInfo']))
-        {
-            $this->setRankingInfo($attributes['_rankingInfo']);
-        }
-        
-        //Add any additional data stored in algolia as required
-
-        return parent::fill($attributes);
-    }
-
-    public function getRankingInfoAttribute(): array
-    {
-        return $this->rankingInfo;
-    }
-
-    public function setRankingInfo(array $rankingInfo)
-    {
-        $this->rankingInfo = $rankingInfo;
-    }
-
-$result = ExampleModel::search('')->with($params)->get();
-
+// Models around Paris latitude and longitude
+Model::search('query')->aroundLatLng(48.8588536, 2.3125377)->get();
 ```
+
+Where clauses can also be added
+
+```php
+Model::search('query')
+    ->aroundLatLng(48.8588536, 2.3125377)
+    ->where('something_id', 1)
+    ->get();
+```
+
 
 ## Contributing
 
