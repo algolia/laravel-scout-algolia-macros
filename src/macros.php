@@ -102,7 +102,14 @@ if (! Builder::hasMacro('hydrate')) {
         $className = get_class($this->model);
         $models = new Collection();
 
-        Eloquent::unguard();
+        /* If the model is fully guarded, we unguard it.
+        Fully garded is the default configuration and it will
+        only result in error.
+        If the `$guarded` attribute is set to a list of attribute
+        we take it into account. */
+        if (in_array('*', $this->model->getGuarded())) {
+            Eloquent::unguard();
+        }
 
         $hits->each(function($item, $key) use ($className, $models) {
             $models->push(new $className($item));
