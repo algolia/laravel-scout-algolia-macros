@@ -11,7 +11,7 @@ Algolia-specific feature.
 Pull the package using composer
 
 ```
-composer install algolia/laravel-scout-algolia-macros
+composer require algolia/laravel-scout-algolia-macros
 ```
 
 Next, you should add the `Algolia\ScoutMacros\ServiceProvider` to the `providers`
