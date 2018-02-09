@@ -17,6 +17,19 @@ if (! Builder::hasMacro('count')) {
     });
 }
 
+if (! Builder::hasMacro('withCount')) {
+    /**
+     * Return the total amount of results for the current query.
+     *
+     * @return int Number of results
+     */
+    Builder::macro('withCount', function () {
+        $this->model->withCount(['people']);
+
+        return $this;
+    });
+}
+
 if (! Builder::hasMacro('aroundLatLng')) {
     /**
      * Search for entries around a given location.
