@@ -19,7 +19,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-      "laravel/scout": "^3.0.5"
+      "laravel/scout": "^3.0.5 || ^4.0"
     },
     "autoload": {
         "psr-4": {
