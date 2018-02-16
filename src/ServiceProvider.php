@@ -3,7 +3,7 @@
 namespace Algolia\ScoutMacros;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-
+use AlgoliaSearch\Version as AlgoliaUserAgent;
 
 class ServiceProvider extends LaravelServiceProvider
 {
