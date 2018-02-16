@@ -1,3 +1,9 @@
+## v0.5.0
+
+* Support Laravel Scout v4
+* Fix User Agent
+
+
 ## v0.4.0
 
 * Ensure `hydrate` properly plays with Eloquent quarded attributes
