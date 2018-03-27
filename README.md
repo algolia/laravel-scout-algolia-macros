@@ -97,7 +97,7 @@ $params = [
             'hitsPerPage' => 30,
             'page' => 0,
             'aroundRadius' => 30000, //30km
-            'aroundPrecision' => 200), //200 Meters
+            'aroundPrecision' => 200, //200 Meters
             'getRankingInfo' => true, //return ranking information in results
             'filters' => $filterString // add filters
         ];
