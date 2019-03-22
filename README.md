@@ -1,3 +1,5 @@
+**DEPRECATED: Use of this repository is deprecated. Please use Scout Extended - https://github.com/algolia/scout-extended instead.**
+
 # Laravel Scout Algolia Macros
 
 A collection of useful macros to extend Laravel Scout capabilities when using the [Algolia engine](https://laravel.com/docs/5.4/scout#driver-prerequisites).
